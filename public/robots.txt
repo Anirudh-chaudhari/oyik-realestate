@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://oyik-ai-site.netlify.app/sitemap.xml

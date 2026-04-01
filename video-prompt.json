@@ -1,0 +1,14 @@
+{
+  "title": "Futuristic Luxury Real Estate Skyline",
+  "background": {
+    "description": "A cinematic, ultra-high-quality render of a futuristic luxury real estate building at night, illuminated by electric cyan and deep blue neon lights, standing majestically against a dark space background.",
+    "era": "Future / Cyberpunk luxury",
+    "location": "A smart-city skyline"
+  },
+  "camera": {
+    "type": "Slow cinematic drone pan",
+    "movement": "Smooth, majestic tracking shot glowing nodes activating",
+    "angle": "Low angle looking up at the glowing architecture",
+    "focus": "Sharp focus on the building, soft neon bokeh in the background"
+  }
+}
