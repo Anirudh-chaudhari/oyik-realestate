@@ -4,62 +4,72 @@ Chatbot.init({
   metadata: {},
   theme: {
     button: {
-      backgroundColor: "#3F37B8",
-      right: 20,
+      backgroundColor: "#8e2ebf",
+      right: 25,
       bottom: 20,
-      size: 56,
-      iconColor: "#FFFFFF",
-      autoWindowOpen: { autoOpen: false, openDelay: 2 },
-      borderRadius: "rounded-full",
-      draggable: false
+      size: 62,
+      iconColor: "#d2acac",
+      customIconSrc: "https://www.svgrepo.com/show/388454/robot-one.svg",
+      customIconSize: 85,
+      customIconBorderRadius: 48,
+      autoWindowOpen: {
+        autoOpen: false,
+        openDelay: 2
+      },
+      borderRadius: "rounded"
     },
     tooltip: {
       showTooltip: true,
-      tooltipMessage: "Chat with us",
-      tooltipBackgroundColor: "#3F37B8",
-      tooltipTextColor: "#FFFFFF",
-      tooltipFontSize: 14,
-      hideTooltipOnMobile: true
+      tooltipMessage: "Chat with our AI agent",
+      tooltipBackgroundColor: "#b04040",
+      tooltipTextColor: "#fff9f6",
+      tooltipFontSize: 14
     },
-    allowProgrammaticMessage: false,
     chatWindow: {
-      borderRadiusStyle: "rounded-2xl",
-      avatarBorderRadius: 20,
-      messageBorderRadius: 16,
+      borderRadiusStyle: "rounded",
+      avatarBorderRadius: 38,
+      messageBorderRadius: 9,
       showTitle: true,
-      title: "oyik AI Assistant",
+      title: "OYIK.AI",
+      titleAvatarSrc: "https://www.svgrepo.com/show/388454/robot-one.svg",
       avatarSize: 38,
-      welcomeMessage: "Hello! How can I help you today?",
-      errorMessage: "Something went wrong. Please try again.",
-      backgroundColor: "#FFFFFF",
-      height: 500,
-      width: 380,
-      fontSize: 15,
-      starterPrompts: ["What services do you offer?", "How does it work?", "Book a demo"],
-      starterPromptFontSize: 14,
-      renderHTML: false,
-      clearChatOnReload: false,
-      showScrollbar: false,
+      welcomeMessage: "Hello👋  , Welcome To Girona AI!",
+      errorMessage: "Oops! Something went wrong on my end. Please try again in a moment",
+      backgroundColor: "#ebe5e5",
+      height: 600,
+      width: 400,
+      fontSize: 16,
+      starterPrompts: [
+        "I need a booking !",
+        "I need to know more about your services"
+      ],
+      starterPromptFontSize: 15,
+      renderHTML: true,
+      clearChatOnReload: true,
+      showScrollbar: true,
       botMessage: {
-        backgroundColor: "#F2EEE6",
-        textColor: "#111111",
+        backgroundColor: "#c093d7",
+        textColor: "#fafafa",
         showAvatar: true,
+        avatarSrc: "https://www.svgrepo.com/show/108472/robot.svg",
         showCopyToClipboardIcon: false
       },
       userMessage: {
-        backgroundColor: "#3F37B8",
-        textColor: "#FFFFFF",
-        showAvatar: true
+        backgroundColor: "#8e2ebf",
+        textColor: "#ffffff",
+        showAvatar: true,
+        avatarSrc: "https://www.svgrepo.com/show/530412/user.svg"
       },
       textInput: {
-        placeholder: "Type your message...",
-        backgroundColor: "#F7F5F0",
-        textColor: "#111111",
-        sendButtonColor: "#3F37B8",
-        maxChars: 500,
-        autoFocus: false,
-        borderRadius: 12,
-        sendButtonBorderRadius: 12
+        placeholder: "How can I help you today?",
+        backgroundColor: "#222034",
+        textColor: "#fafaff",
+        sendButtonColor: "#f36539",
+        maxChars: 200,
+        maxCharsWarningMessage: "You exceeded the characters limit. Please input less than 200 characters.",
+        autoFocus: true,
+        borderRadius: 8,
+        sendButtonBorderRadius: 14
       }
     }
   }
