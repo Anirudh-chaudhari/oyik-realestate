@@ -1,0 +1,110 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" rx="48" fill="#F7F8FF"/>
+  <rect width="1600" height="1200" rx="48" fill="url(#bgGlow)"/>
+  <g opacity="0.55">
+    <path d="M0 160H1600" stroke="#D8DEF7"/>
+    <path d="M0 320H1600" stroke="#D8DEF7"/>
+    <path d="M0 480H1600" stroke="#D8DEF7"/>
+    <path d="M0 640H1600" stroke="#D8DEF7"/>
+    <path d="M0 800H1600" stroke="#D8DEF7"/>
+    <path d="M0 960H1600" stroke="#D8DEF7"/>
+    <path d="M200 0V1200" stroke="#D8DEF7"/>
+    <path d="M400 0V1200" stroke="#D8DEF7"/>
+    <path d="M600 0V1200" stroke="#D8DEF7"/>
+    <path d="M800 0V1200" stroke="#D8DEF7"/>
+    <path d="M1000 0V1200" stroke="#D8DEF7"/>
+    <path d="M1200 0V1200" stroke="#D8DEF7"/>
+    <path d="M1400 0V1200" stroke="#D8DEF7"/>
+  </g>
+
+  <rect x="90" y="90" width="1420" height="1020" rx="40" fill="white" fill-opacity="0.8" stroke="#E4E9F7" stroke-width="2"/>
+
+  <rect x="150" y="150" width="500" height="820" rx="34" fill="url(#panelGlow)" stroke="#DFE5F8" stroke-width="2"/>
+  <rect x="205" y="204" width="82" height="82" rx="24" fill="#E8F7F0"/>
+  <path d="M247 226C232.088 226 220 238.088 220 253C220 267.912 232.088 280 247 280C261.912 280 274 267.912 274 253" stroke="#0F766E" stroke-width="14" stroke-linecap="round"/>
+  <path d="M247 281V327" stroke="#0F766E" stroke-width="14" stroke-linecap="round"/>
+  <path d="M221 307L247 327L273 307" stroke="#0F766E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="315" y="218" width="238" height="52" rx="26" fill="white" stroke="#DFE5F8"/>
+  <text x="350" y="251" fill="#31456A" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.16em">TENANT SUPPORT</text>
+
+  <text x="205" y="390" fill="#101828" font-family="Arial, sans-serif" font-size="78" font-weight="800">Maintenance</text>
+  <text x="205" y="472" fill="#101828" font-family="Arial, sans-serif" font-size="78" font-weight="800">Intake Agent</text>
+  <text x="205" y="560" fill="#4338CA" font-family="Arial, sans-serif" font-size="34" font-weight="700">
+    Collect the issue. Check urgency. Route the next step.
+  </text>
+
+  <text x="205" y="640" fill="#556070" font-family="Arial, sans-serif" font-size="28">
+    The AI agent gathers the problem in detail, logs every case
+  </text>
+  <text x="205" y="684" fill="#556070" font-family="Arial, sans-serif" font-size="28">
+    to CRM, sends updates, and pushes urgent issues straight to
+  </text>
+  <text x="205" y="728" fill="#556070" font-family="Arial, sans-serif" font-size="28">
+    your maintenance team without messy manual triage.
+  </text>
+
+  <rect x="205" y="804" width="272" height="120" rx="28" fill="#0F172A"/>
+  <text x="255" y="872" fill="white" font-family="Arial, sans-serif" font-size="34" font-weight="700">CRM Logged</text>
+  <circle cx="410" cy="865" r="20" fill="#1E293B"/>
+  <path d="M400 865H420" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M410 855V875" stroke="white" stroke-width="4" stroke-linecap="round"/>
+
+  <rect x="780" y="150" width="660" height="420" rx="34" fill="#FDFEFF" stroke="#E4E9F7" stroke-width="2"/>
+  <rect x="840" y="210" width="210" height="48" rx="24" fill="#F3F6FF" stroke="#DCE4F8"/>
+  <text x="875" y="241" fill="#53627E" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="0.18em">ISSUE INTAKE</text>
+
+  <rect x="840" y="294" width="540" height="104" rx="26" fill="#F8FAFC" stroke="#E4E7EC"/>
+  <text x="876" y="338" fill="#667085" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="0.2em">TENANT MESSAGE</text>
+  <text x="876" y="374" fill="#0F172A" font-family="Arial, sans-serif" font-size="26">
+    "There is a leak under the kitchen sink and the floor
+  </text>
+  <text x="876" y="408" fill="#0F172A" font-family="Arial, sans-serif" font-size="26">
+    is getting wet near the cabinet."
+  </text>
+
+  <rect x="840" y="430" width="250" height="94" rx="24" fill="#FEF3C7" stroke="#FACC15"/>
+  <text x="876" y="470" fill="#92400E" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="0.18em">PRIORITY</text>
+  <text x="876" y="505" fill="#111827" font-family="Arial, sans-serif" font-size="24" font-weight="700">Urgent leak risk detected</text>
+
+  <rect x="1112" y="430" width="268" height="94" rx="24" fill="#ECFDF3" stroke="#34D399"/>
+  <text x="1148" y="470" fill="#047857" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="0.18em">NEXT ACTION</text>
+  <text x="1148" y="505" fill="#111827" font-family="Arial, sans-serif" font-size="24" font-weight="700">Send to maintenance team</text>
+
+  <rect x="780" y="612" width="660" height="438" rx="34" fill="url(#lowerPanel)" stroke="#E4E9F7" stroke-width="2"/>
+  <rect x="838" y="676" width="256" height="144" rx="28" fill="white" fill-opacity="0.9" stroke="#DDE5F8"/>
+  <text x="878" y="722" fill="#0F766E" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="0.18em">CRM UPDATE</text>
+  <text x="878" y="766" fill="#0F172A" font-family="Arial, sans-serif" font-size="24">Tenant details saved</text>
+  <text x="878" y="801" fill="#0F172A" font-family="Arial, sans-serif" font-size="24">Property tagged</text>
+
+  <rect x="1118" y="676" width="262" height="144" rx="28" fill="white" fill-opacity="0.9" stroke="#DDE5F8"/>
+  <text x="1158" y="722" fill="#4338CA" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="0.18em">EMAIL SENT</text>
+  <text x="1158" y="766" fill="#0F172A" font-family="Arial, sans-serif" font-size="24">Case confirmation</text>
+  <text x="1158" y="801" fill="#0F172A" font-family="Arial, sans-serif" font-size="24">Booking details attached</text>
+
+  <rect x="838" y="854" width="542" height="134" rx="28" fill="#F8FAFC" stroke="#DDE5F8"/>
+  <text x="878" y="900" fill="#667085" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="0.18em">NON-URGENT FLOW</text>
+  <text x="878" y="944" fill="#0F172A" font-family="Arial, sans-serif" font-size="24">
+    Send SMS or email form link so the tenant can add more details
+  </text>
+  <text x="878" y="978" fill="#0F172A" font-family="Arial, sans-serif" font-size="24">
+    and upload issue photos before the case is assigned.
+  </text>
+
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1120 240) rotate(130.601) scale(1126.72 970.655)">
+      <stop stop-color="#E0E7FF"/>
+      <stop offset="0.46" stop-color="#F7F8FF" stop-opacity="0.84"/>
+      <stop offset="1" stop-color="#F7F8FF" stop-opacity="0.3"/>
+    </radialGradient>
+    <linearGradient id="panelGlow" x1="150" y1="150" x2="650" y2="970" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.52" stop-color="#F9FBFF"/>
+      <stop offset="1" stop-color="#F2F7FF"/>
+    </linearGradient>
+    <linearGradient id="lowerPanel" x1="780" y1="612" x2="1440" y2="1050" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6FFFB"/>
+      <stop offset="0.52" stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#F4F6FF"/>
+    </linearGradient>
+  </defs>
+</svg>
