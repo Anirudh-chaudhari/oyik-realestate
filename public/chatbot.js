@@ -20,9 +20,9 @@
     const style = document.createElement("style");
     style.innerHTML = `
       :root {
-        --oyik-primary: #ff6b35;
-        --oyik-primary-dark: #e8541e;
-        --oyik-primary-glow: rgba(255, 107, 53, 0.35);
+        --oyik-primary: #8b5cf6;
+        --oyik-primary-dark: #7c3aed;
+        --oyik-primary-glow: rgba(139, 92, 246, 0.35);
         --oyik-bg: #0f0f13;
         --oyik-surface: #1a1a22;
         --oyik-surface2: #22222e;
@@ -39,7 +39,7 @@
         width: 62px;
         height: 62px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--oyik-primary), #ff9a6c);
+        background: linear-gradient(135deg, var(--oyik-primary), #c4b5fd);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -59,7 +59,7 @@
       }
       @keyframes oyik-pulse {
         0%, 100% { box-shadow: 0 4px 24px var(--oyik-primary-glow), 0 2px 8px rgba(0,0,0,0.4); }
-        50% { box-shadow: 0 4px 36px rgba(255,107,53,0.55), 0 2px 8px rgba(0,0,0,0.4); }
+        50% { box-shadow: 0 4px 36px rgba(139,92,246,0.55), 0 2px 8px rgba(0,0,0,0.4); }
       }
 
       #oyik-launcher-icon {
@@ -137,7 +137,7 @@
         width: 40px;
         height: 40px;
         border-radius: 12px;
-        background: linear-gradient(135deg, var(--oyik-primary), #ff9a6c);
+        background: linear-gradient(135deg, var(--oyik-primary), #c4b5fd);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -322,8 +322,8 @@
         transition: border-color 0.2s, box-shadow 0.2s;
       }
       #oyik-input-row:focus-within {
-        border-color: rgba(255,107,53,0.4);
-        box-shadow: 0 0 0 3px rgba(255,107,53,0.08);
+        border-color: rgba(139,92,246,0.4);
+        box-shadow: 0 0 0 3px rgba(139,92,246,0.08);
       }
       #oyik-input {
         flex: 1;
@@ -379,9 +379,9 @@
     launcher.innerHTML = `
       <svg id="oyik-launcher-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 6C4 4.89543 4.89543 4 6 4H22C23.1046 4 24 4.89543 24 6V17C24 18.1046 23.1046 19 22 19H15L9 24V19H6C4.89543 19 4 18.1046 4 17V6Z" fill="white" fill-opacity="0.95"/>
-        <circle cx="10" cy="12" r="1.5" fill="#ff6b35"/>
-        <circle cx="14" cy="12" r="1.5" fill="#ff6b35"/>
-        <circle cx="18" cy="12" r="1.5" fill="#ff6b35"/>
+        <circle cx="10" cy="12" r="1.5" fill="#c4b5fd"/>
+        <circle cx="14" cy="12" r="1.5" fill="#c4b5fd"/>
+        <circle cx="18" cy="12" r="1.5" fill="#c4b5fd"/>
       </svg>
       <div id="oyik-notif">1</div>
     `;
