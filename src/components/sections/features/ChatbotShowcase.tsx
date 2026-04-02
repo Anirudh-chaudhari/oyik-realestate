@@ -297,11 +297,11 @@ export default function ChatbotShowcase() {
 
                 <div className="mt-6 rounded-[1.45rem] border border-white/10 bg-white/7 p-3">
                   <div className="flex items-center gap-3 rounded-[1.2rem] border border-white/8 bg-white/90 px-4 py-4">
-                    <MessageSquareMore className="h-5 w-5 shrink-0 text-indigo-600" />
+                    <MessageSquareMore className="h-5 w-5 shrink-0 text-violet-600" />
                     <span className="text-sm text-slate-500">
                       Ask for a Leicester area, budget, or viewing time...
                     </span>
-                    <div className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#4f46e5,#4338ca)] text-white shadow-[0_16px_32px_-18px_rgba(79,70,229,0.7)]">
+                    <div className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#8b5cf6,#7c3aed)] text-white shadow-[0_16px_32px_-18px_rgba(139,92,246,0.7)]">
                       <Send className="h-4 w-4" />
                     </div>
                   </div>
@@ -316,7 +316,7 @@ export default function ChatbotShowcase() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.28em] text-indigo-700">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.28em] text-violet-700">
               Website chat
             </p>
             <h2 className="max-w-3xl text-4xl font-display font-medium leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-5xl lg:text-[4.15rem]">
@@ -342,7 +342,7 @@ export default function ChatbotShowcase() {
                 type="button"
                 suppressHydrationWarning
                 onClick={() => setIsOpen((current) => !current)}
-                className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-slate-900 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:text-primary"
+                className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-slate-900 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-200 hover:text-primary"
               >
                 {isOpen ? "Close live demo" : "Open live demo"}
                 <MessageSquareMore className="h-4 w-4" />
@@ -355,7 +355,7 @@ export default function ChatbotShowcase() {
                   key={item.title}
                   className="rounded-[1.8rem] border border-white/80 bg-white/76 p-5 shadow-[0_20px_40px_-34px_rgba(15,23,42,0.2)]"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-50 text-primary">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 text-primary">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <h3 className="mt-4 text-[1.4rem] font-display font-medium leading-[1.02] tracking-[-0.02em] text-slate-950">
@@ -381,7 +381,7 @@ export default function ChatbotShowcase() {
                   ],
                 }}
                 transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-                className="group relative inline-flex w-full justify-center overflow-hidden rounded-full border border-indigo-300/40 bg-[linear-gradient(135deg,#4f46e5,#4338ca)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white sm:w-auto sm:min-w-[20rem]"
+                className="group relative inline-flex w-full justify-center overflow-hidden rounded-full border border-violet-300/40 bg-[linear-gradient(135deg,#8b5cf6,#7c3aed)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white sm:w-auto sm:min-w-[20rem]"
               >
                 <span className="relative z-10 flex w-full items-center justify-center gap-3">
                   Launch live property chat
@@ -445,7 +445,7 @@ export default function ChatbotShowcase() {
                               />
                             </div>
                             <div>
-                              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-indigo-600">
+                              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-violet-600">
                                 Oyik
                               </p>
                               <p className="mt-1 text-lg font-display font-medium tracking-[-0.02em] text-slate-950">
@@ -471,7 +471,7 @@ export default function ChatbotShowcase() {
                               {widgetState === "loading" ? (
                                 <div className="absolute inset-0 z-20 flex items-center justify-center bg-[rgba(245,248,255,0.78)] backdrop-blur-sm">
                                   <div className="rounded-[1.5rem] border border-white/70 bg-white/92 px-6 py-5 text-center shadow-[0_20px_60px_-34px_rgba(15,23,42,0.26)]">
-                                    <LoaderCircle className="mx-auto h-7 w-7 animate-spin text-indigo-600" />
+                                    <LoaderCircle className="mx-auto h-7 w-7 animate-spin text-violet-600" />
                                     <p className="mt-3 text-sm font-medium text-slate-900">
                                       Loading live chat
                                     </p>
