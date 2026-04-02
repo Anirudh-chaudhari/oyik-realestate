@@ -393,7 +393,7 @@
         <div id="oyik-header-inner">
           <div id="oyik-avatar">🤖</div>
           <div id="oyik-header-text">
-            <div id="oyik-header-name">Oyik.AI Assistant</div>
+            <div id="oyik-header-name">Oyik.AI RealEstate Assistant</div>
             <div id="oyik-header-status">
               <div id="oyik-status-dot"></div>
               <span id="oyik-status-text">Online · Typically replies instantly</span>

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 type LogoItem = {
   name: string;
@@ -101,6 +102,11 @@ function EcosystemCard({ item }: { item: LogoItem }) {
 
 export default function Logos() {
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <section className="relative overflow-hidden border-y border-slate-200/70 bg-[linear-gradient(180deg,#fbfcff_0%,#f3f6ff_54%,#edf3ff_100%)] py-20 sm:py-24">
@@ -174,8 +180,8 @@ export default function Logos() {
                 <div className="flex overflow-hidden">
                   <motion.div
                     className="flex min-w-max gap-4 py-1"
-                    animate={reduceMotion ? undefined : { x: animation }}
-                    transition={reduceMotion ? undefined : { duration, ease: "linear", repeat: Infinity }}
+                    animate={(reduceMotion || !mounted) ? undefined : { x: animation }}
+                    transition={(reduceMotion || !mounted) ? undefined : { duration, ease: "linear", repeat: Infinity }}
                   >
                     {repeated.map((item, index) => (
                       <EcosystemCard key={`${row.label}-${item.name}-${index}`} item={item} />

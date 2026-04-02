@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Plug, Settings, TrendingUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const cycleDuration = 5;
 
@@ -31,7 +32,12 @@ const steps = [
 
 export default function HowItWorks() {
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const flowPath = "M 90 102 C 240 38, 366 38, 500 102 S 754 166, 910 102";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-secondary py-32">
@@ -46,7 +52,7 @@ export default function HowItWorks() {
 
       <div className="absolute inset-x-0 top-0 z-0 h-52 bg-[radial-gradient(circle_at_top,rgba(90,84,235,0.16),transparent_68%)]" />
 
-      {!reduceMotion && (
+      {(!reduceMotion && mounted) && (
         <>
           <motion.div
             aria-hidden="true"
@@ -125,7 +131,7 @@ export default function HowItWorks() {
                 strokeLinecap="round"
               />
 
-              {!reduceMotion && (
+              {!reduceMotion && mounted && (
                 <>
                   <path
                     d={flowPath}
@@ -202,7 +208,7 @@ export default function HowItWorks() {
               )}
             </svg>
 
-            {!reduceMotion && (
+            {!reduceMotion && mounted && (
               <>
                 <motion.div
                   aria-hidden="true"
@@ -264,7 +270,7 @@ export default function HowItWorks() {
               <div className="relative mb-8 flex h-40 w-40 items-center justify-center rounded-[2.35rem] border border-border/70 bg-white/95 shadow-[0_28px_60px_-28px_rgba(63,55,184,0.34)] transition-transform duration-500 group-hover:-translate-y-3">
                 <div className="absolute inset-0 rounded-[2.2rem] bg-[radial-gradient(circle_at_top,rgba(90,84,235,0.12),transparent_68%)] opacity-80" />
 
-                {!reduceMotion && idx === 0 && (
+                {!reduceMotion && mounted && idx === 0 && (
                   <>
                     <motion.div
                       aria-hidden="true"
@@ -311,7 +317,7 @@ export default function HowItWorks() {
                   </>
                 )}
 
-                {!reduceMotion && idx === 1 && (
+                {!reduceMotion && mounted && idx === 1 && (
                   <>
                     <motion.div
                       aria-hidden="true"
@@ -375,7 +381,7 @@ export default function HowItWorks() {
                   </>
                 )}
 
-                {!reduceMotion && idx === 2 && (
+                {!reduceMotion && mounted && idx === 2 && (
                   <>
                     <motion.div
                       aria-hidden="true"
@@ -425,7 +431,7 @@ export default function HowItWorks() {
 
                 <motion.div
                   animate={
-                    reduceMotion
+                    reduceMotion || !mounted
                       ? undefined
                       : idx === 0
                         ? {
@@ -443,7 +449,7 @@ export default function HowItWorks() {
                             }
                   }
                   transition={
-                    reduceMotion
+                    reduceMotion || !mounted
                       ? undefined
                       : idx === 0
                         ? { duration: cycleDuration, times: [0, 0.14, 0.28], repeat: Infinity, ease: "easeInOut" }

@@ -110,10 +110,16 @@ export default function Products() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { scrollYProgress } = useScroll({ target: containerRef });
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (!mounted) return;
     const index = Math.min(products.length - 1, Math.floor(value * products.length));
     setActiveIndex((current) => (current === index ? current : index));
   });

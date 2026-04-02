@@ -9,8 +9,10 @@ const rotatingWords = ["marketing.", "viewings.", "lettings.", "reminders.", "su
 
 export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const interval = window.setInterval(() => {
       setWordIndex((current) => (current + 1) % rotatingWords.length);
     }, 2400);

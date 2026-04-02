@@ -27,17 +27,22 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 28);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const shouldShowBlur = !reduceMotion && mounted;
+
   return (
     <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-3 sm:top-6 sm:px-4 lg:top-10">
       <div className="pointer-events-auto relative flex w-full max-w-[min(100%,28rem)] flex-col items-center lg:w-auto lg:max-w-[calc(100vw-2.5rem)]">
-        {!reduceMotion && (
+        {!reduceMotion && mounted && (
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-[4px] hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(129,140,248,0.18),transparent_62%)] opacity-80 blur-xl lg:block"
@@ -55,7 +60,7 @@ export default function Navbar() {
             scrolled ? "border-slate-900/10 bg-white/65" : "border-white/16 bg-slate-950/18"
           }`}
         >
-          <div className="absolute inset-[1px] rounded-[1.65rem] border border-white/8 lg:rounded-full" />
+          <div className="absolute inset-[1px] rounded-[1.65rem] border border-white/8 lg:rounded-full" suppressHydrationWarning />
 
           <Link href="/" className="relative z-10 flex min-w-0 shrink items-center gap-3 pr-2 sm:pr-4 lg:pr-6">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/22 bg-white shadow-[0_12px_30px_-18px_rgba(63,55,184,0.45)] sm:h-12 sm:w-12 lg:h-14 lg:w-14">

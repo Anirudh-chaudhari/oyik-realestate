@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const testimonials = [
   {
@@ -49,7 +50,13 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const marqueeTestimonials = [...testimonials, ...testimonials];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-background py-24">
@@ -95,8 +102,8 @@ export default function Testimonials() {
       <div className="relative z-10 hidden overflow-hidden md:block">
         <motion.div
           className="flex gap-6 px-6 lg:px-10"
-          animate={{ x: [0, -1720] }}
-          transition={{ repeat: Infinity, duration: 34, ease: "linear" }}
+          animate={(reduceMotion || !mounted) ? undefined : { x: [0, -1720] }}
+          transition={(reduceMotion || !mounted) ? undefined : { repeat: Infinity, duration: 34, ease: "linear" }}
         >
           {marqueeTestimonials.map((item, index) => (
             <article
