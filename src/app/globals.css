@@ -203,7 +203,7 @@ html.lenis body {
   --chat--transition-duration: 0.22s;
   --chat--font-family: var(--font-sans), "Segoe UI", sans-serif;
   --chat--header--padding: 1.1rem 1.2rem;
-  --chat--header--background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(47, 46, 122, 0.92));
+  --chat--header--background: linear-gradient(135deg, rgba(139, 92, 246, 0.96), rgba(124, 58, 237, 0.92));
   --chat--header--color: #F8FBFF;
   --chat--heading--font-size: 1.3rem;
   --chat--subtitle--font-size: 0.95rem;
@@ -217,7 +217,7 @@ html.lenis body {
   --chat--message--bot--background: rgba(255, 255, 255, 0.94);
   --chat--message--bot--color: #172033;
   --chat--message--bot--border: 1px solid rgba(148, 163, 184, 0.16);
-  --chat--message--user--background: #3F37B8;
+  --chat--message--user--background: linear-gradient(135deg, #8b5cf6, #a78bfa);
   --chat--message--user--color: #FFFFFF;
   --chat--message--user--border: 1px solid transparent;
   --chat--body--background: linear-gradient(180deg, rgba(247, 250, 255, 0.96), rgba(235, 241, 255, 0.98));
@@ -231,14 +231,14 @@ html.lenis body {
   --chat--input--container--padding: 0.4rem 0.45rem 0.4rem 0.65rem;
   --chat--input--padding: 0.75rem;
   --chat--input--button--border-radius: 999px;
-  --chat--input--send--button--background: rgba(63, 55, 184, 0.14);
-  --chat--input--send--button--color: #3F37B8;
-  --chat--input--send--button--background-hover: #3F37B8;
+  --chat--input--send--button--background: rgba(139, 92, 246, 0.14);
+  --chat--input--send--button--color: #8b5cf6;
+  --chat--input--send--button--background-hover: #8b5cf6;
   --chat--input--send--button--color-hover: #FFFFFF;
   --chat--button--padding: 0.78rem 1.05rem;
   --chat--button--border-radius: 999px;
-  --chat--button--background--primary: #3F37B8;
-  --chat--button--background--primary--hover: #342EA0;
+  --chat--button--background--primary: #8b5cf6;
+  --chat--button--background--primary--hover: #7c3aed;
   --chat--button--color--primary: #FFFFFF;
   --chat--message--actions--color: #4F46E5;
 }
@@ -295,7 +295,7 @@ html.lenis body {
 }
 
 .chatbot-live-shell .chat-message.chat-message-from-user {
-  box-shadow: 0 20px 42px -32px rgba(63, 55, 184, 0.48);
+  box-shadow: 0 20px 42px -32px rgba(139, 92, 246, 0.48);
 }
 
 .chatbot-live-shell .chat-messages-list {
