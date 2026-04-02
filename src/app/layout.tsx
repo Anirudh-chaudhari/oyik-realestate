@@ -114,8 +114,8 @@ export default function RootLayout({
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script dangerouslySetInnerHTML={{ __html: `
-    (function () {
-      var cfg = {
+(function () {
+  var cfg = {
   "chatMode": "webhook",
   "agentId": null,
   "apiBaseUrl": "https://oyik.info",
