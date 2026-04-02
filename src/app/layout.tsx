@@ -115,6 +115,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script dangerouslySetInnerHTML={{ __html: `
 (function () {
+  try {
   var cfg = {
   "chatMode": "webhook",
   "agentId": null,
@@ -885,7 +886,11 @@ export default function RootLayout({
       }
 
       render();
-    })();
+      console.log('Chat widget initialized');
+    } catch (e) {
+      console.error('Chat widget error:', e);
+    }
+  })();
         ` }} />
       </head>
       <body className="flex min-h-screen flex-col overflow-x-hidden bg-background font-sans text-foreground">
