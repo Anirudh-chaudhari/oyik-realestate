@@ -1,53 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oyik Real Estate Chat Widget</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Inter, 'Segoe UI', sans-serif; }
-    #lk-chat { position: fixed; z-index: 9998; }
-    .lk-widget { transition: opacity .2s ease, transform .2s ease; }
-    .lk-msgs { scrollbar-width: thin; scrollbar-color: rgba(88,82,205,.2) transparent; }
-    .lk-msgs::-webkit-scrollbar { width: 5px; }
-    .lk-msgs::-webkit-scrollbar-thumb { background: rgba(88,82,205,.2); border-radius: 999px; }
-    .lk-bubble { word-break: break-word; }
-    .lk-input { outline: none; caret-color: #5852CD; }
-    .lk-input:focus { box-shadow: none; }
-    .lk-send { transition: filter .2s ease, transform .16s ease; }
-    .lk-send:hover { filter: brightness(1.1); }
-    .lk-send:active { transform: translateY(1px); }
-    .lk-close { transition: background .2s ease, transform .16s ease; }
-    .lk-close:hover { background: rgba(255,255,255,.28) !important; }
-    .lk-close:active { transform: scale(.97); }
-    .lk-quick { transition: background .2s ease, border-color .2s ease; }
-    .lk-quick:hover { background: rgba(88,82,205,.15) !important; }
-    .lk-launcher { transition: transform .18s ease, box-shadow .2s ease; }
-    .lk-launcher:hover { transform: translateY(-2px); box-shadow: 0 20px 36px rgba(88,82,205,.55) !important; }
-    .lk-typing { display: inline-flex; align-items: center; gap: 5px; padding: 10px 14px; }
-    .lk-typing span { width: 7px; height: 7px; border-radius: 999px; background: #5852CD; opacity: 0.5; display: inline-block; animation: lkDot 1.2s infinite ease-in-out; }
-    .lk-typing span:nth-child(2) { animation-delay: .15s; }
-    .lk-typing span:nth-child(3) { animation-delay: .3s; }
-    .lk-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,.3); animation: lkPulse 2s infinite; }
-    .pill-btn:hover { background: rgba(255,255,255,.12) !important; border-color: rgba(255,255,255,.35) !important; }
-    @keyframes lkDot { 0%, 80%, 100% { transform: translateY(0); opacity: .35; } 40% { transform: translateY(-4px); opacity: 1; } }
-    @keyframes lkPulse { 0%, 100% { box-shadow: 0 0 0 2px rgba(34,197,94,.3); } 50% { box-shadow: 0 0 0 4px rgba(34,197,94,.15); } }
-    @media (max-width: 640px) {
-      #lk-widget { left: 10px !important; right: 10px !important; width: auto !important; max-width: none !important; bottom: 84px !important; border-radius: 18px !important; }
-      #lk-launcher { right: 12px !important; left: auto !important; bottom: max(12px, env(safe-area-inset-bottom)) !important; }
-    }
-    @media (max-width: 420px) {
-      #lk-widget { left: 0 !important; right: 0 !important; bottom: 0 !important; height: 100vh !important; border-radius: 0 !important; max-width: none !important; }
-      #lk-inputbar { padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important; }
-    }
-  </style>
-</head>
-<body>
-
-<div id="lk-chat"></div>
-
-<script>
 (function () {
   var cfg = {
     webhookUrl: "https://oyik.cloud/webhook/f5f0fe52-ef64-4641-b1b5-a0e72d5110bd/chat",
@@ -208,7 +158,6 @@
       var widget = css(document.createElement('div'), Object.assign({ position:'fixed', bottom:'96px', width:'390px', maxWidth:'calc(100vw - 24px)', height:'580px', maxHeight:'calc(100vh - 108px)', borderRadius: cfg.widgetRadius+'px', overflow:'hidden', zIndex:'9999', background:'#ffffff', border:'1px solid rgba(88,82,205,.25)', display:'flex', flexDirection:'column', boxShadow:'0 24px 48px rgba(0,0,0,.18)', fontFamily: cfg.fontFamily, fontSize: cfg.fontSize+'px' }, hPos));
       widget.id = 'lk-widget'; widget.className = 'lk-widget';
 
-      /* Header */
       var head = css(document.createElement('div'), { padding:'14px 16px', background: cfg.colors.brandA, color:'#fff', display:'flex', justifyContent:'space-between', alignItems:'center' });
       var headLeft = css(document.createElement('div'), { display:'flex', alignItems:'center', gap:'12px', minWidth:'0' });
       var avatar = css(document.createElement('div'), { width:'42px', height:'42px', minWidth:'42px', borderRadius:'14px', background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'22px' });
@@ -228,7 +177,6 @@
       closeBtn.onclick = function(){ state.open = false; render(); };
       head.appendChild(headLeft); head.appendChild(closeBtn);
 
-      /* Pills */
       var pillsBar = css(document.createElement('div'), { display:'flex', gap:'8px', padding:'10px 14px', background:'#1f1f32', overflowX:'auto', borderBottom:'1px solid rgba(255,255,255,.06)' });
       [{ icon:'\uD83D\uDCCB', label:'Services' },{ icon:'\uD83D\uDD52', label:'Available slots' },{ icon:'\uD83D\uDCC5', label:'Book a call' }].forEach(function(p) {
         var btn = css(document.createElement('button'), { border:'1px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'rgba(255,255,255,.85)', borderRadius:'999px', padding:'6px 14px', cursor:'pointer', fontSize:'12px', whiteSpace:'nowrap', fontFamily: cfg.fontFamily });
@@ -236,11 +184,9 @@
         pillsBar.appendChild(btn);
       });
 
-      /* Messages */
       var msgBox = css(document.createElement('div'), { flex:'1', overflowY:'auto', padding:'14px 12px', display:'flex', flexDirection:'column', gap:'10px', background:'#ffffff' });
       msgBox.id = 'lk-msgs'; msgBox.className = 'lk-msgs';
 
-      /* Input */
       var inputBar = css(document.createElement('div'), { display:'flex', gap:'8px', borderTop:'1px solid rgba(0,0,0,.08)', padding:'10px 12px', background:'#ffffff', alignItems:'center' });
       inputBar.id = 'lk-inputbar';
       var input = css(document.createElement('input'), { flex:'1', border:'1px solid rgba(0,0,0,.12)', borderRadius:'999px', padding:'10px 16px', fontSize:'13px', background:'#f5f5f8', color:'#1a1a2e', fontFamily: cfg.fontFamily });
@@ -252,7 +198,6 @@
       sendBtn.onclick = function(){ send(); };
       inputBar.appendChild(input); inputBar.appendChild(sendBtn);
 
-      /* Powered by */
       var powered = css(document.createElement('div'), { fontSize:'11px', color:'rgba(0,0,0,.45)', textAlign:'center', padding:'6px 0 10px', background:'#ffffff', borderTop:'1px solid rgba(0,0,0,.06)' });
       var poweredLink = document.createElement('a');
       poweredLink.href = 'https://oyik.ai'; poweredLink.target = '_blank'; poweredLink.rel = 'noopener noreferrer';
@@ -265,7 +210,6 @@
       renderMessages(msgBox);
     }
 
-    /* Launcher */
     if (!state.open) {
       var launcher = css(document.createElement('button'), Object.assign({ position:'fixed', bottom: cfg.bottom, width: cfg.launcherSize+'px', height: cfg.launcherSize+'px', border:'none', borderRadius: cfg.launcherRadius+'px', color:'#fff', cursor:'pointer', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'3px', zIndex:'9998', background: cfg.colors.brandA, boxShadow:'0 12px 28px rgba(88,82,205,.45)' }, hPos));
       launcher.id = 'lk-launcher'; launcher.className = 'lk-launcher';
@@ -275,9 +219,15 @@
     }
   }
 
+  if (!root) {
+    root = document.createElement('div');
+    root.id = 'lk-chat';
+    document.body.appendChild(root);
+  }
+
+  var style = document.createElement('style');
+  style.textContent = '* { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: Inter, "Segoe UI", sans-serif; } #lk-chat { position: fixed; z-index: 9998; } .lk-widget { transition: opacity .2s ease, transform .2s ease; } .lk-msgs { scrollbar-width: thin; scrollbar-color: rgba(88,82,205,.2) transparent; } .lk-msgs::-webkit-scrollbar { width: 5px; } .lk-msgs::-webkit-scrollbar-thumb { background: rgba(88,82,205,.2); border-radius: 999px; } .lk-bubble { word-break: break-word; } .lk-input { outline: none; caret-color: #5852CD; } .lk-input:focus { box-shadow: none; } .lk-send { transition: filter .2s ease, transform .16s ease; } .lk-send:hover { filter: brightness(1.1); } .lk-send:active { transform: translateY(1px); } .lk-close { transition: background .2s ease, transform .16s ease; } .lk-close:hover { background: rgba(255,255,255,.28) !important; } .lk-close:active { transform: scale(.97); } .lk-quick { transition: background .2s ease, border-color .2s ease; } .lk-quick:hover { background: rgba(88,82,205,.15) !important; } .lk-launcher { transition: transform .18s ease, box-shadow .2s ease; } .lk-launcher:hover { transform: translateY(-2px); box-shadow: 0 20px 36px rgba(88,82,205,.55) !important; } .lk-typing { display: inline-flex; align-items: center; gap: 5px; padding: 10px 14px; } .lk-typing span { width: 7px; height: 7px; border-radius: 999px; background: #5852CD; opacity: 0.5; display: inline-block; animation: lkDot 1.2s infinite ease-in-out; } .lk-typing span:nth-child(2) { animation-delay: .15s; } .lk-typing span:nth-child(3) { animation-delay: .3s; } .lk-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,.3); animation: lkPulse 2s infinite; } .pill-btn:hover { background: rgba(255,255,255,.12) !important; border-color: rgba(255,255,255,.35) !important; } @keyframes lkDot { 0%, 80%, 100% { transform: translateY(0); opacity: .35; } 40% { transform: translateY(-4px); opacity: 1; } } @keyframes lkPulse { 0%, 100% { box-shadow: 0 0 0 2px rgba(34,197,94,.3); } 50% { box-shadow: 0 0 0 4px rgba(34,197,94,.15); } } @media (max-width: 640px) { #lk-widget { left: 10px !important; right: 10px !important; width: auto !important; max-width: none !important; bottom: 84px !important; border-radius: 18px !important; } #lk-launcher { right: 12px !important; left: auto !important; bottom: max(12px, env(safe-area-inset-bottom)) !important; } } @media (max-width: 420px) { #lk-widget { left: 0 !important; right: 0 !important; bottom: 0 !important; height: 100vh !important; border-radius: 0 !important; max-width: none !important; } #lk-inputbar { padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important; } }';
+  document.head.appendChild(style);
+
   render();
 })();
-</script>
-
-</body>
-</html>
