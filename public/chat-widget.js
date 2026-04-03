@@ -128,12 +128,17 @@
     render();
     var since = Date.now();
     try {
-      var res = await fetch(cfg.webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, timestamp: new Date().toISOString(), sessionId: state.sessionId }) });
+      var res = await fetch(cfg.webhookUrl, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({ message: text, timestamp: new Date().toISOString(), sessionId: state.sessionId }),
+        mode: 'cors'
+      });
       var raw = await res.text();
       var parsed = parseWebhook(raw);
       state.messages.push({ id: Date.now()+1, text: parsed.message, user: false, time: new Date() });
     } catch(e) {
-      state.messages.push({ id: Date.now()+1, text: 'Webhook not reachable.', user: false, time: new Date() });
+      state.messages.push({ id: Date.now()+1, text: 'Unable to connect. Please check your connection and try again.', user: false, time: new Date() });
     } finally {
       var wait = 550 - (Date.now() - since);
       if (wait > 0) await new Promise(function(r){ setTimeout(r, wait); });
