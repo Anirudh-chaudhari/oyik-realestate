@@ -14,6 +14,8 @@ type LogoItem = {
 type LogoRow = {
   label: string;
   items: LogoItem[];
+  inlineLabel?: boolean;
+  floating?: boolean;
 };
 
 const cardWidth = 232;
@@ -21,6 +23,8 @@ const cardWidth = 232;
 const ecosystemRows: LogoRow[] = [
   {
     label: "UK portals + CRMs",
+    inlineLabel: true,
+    floating: true,
     items: [
       { name: "Zoopla", tag: "Portal", logoPath: "/brand-icons/zoopla.png", glowClass: "from-fuchsia-500/18 via-transparent to-transparent" },
       { name: "Rightmove", tag: "Portal", logoPath: "/brand-icons/rightmove.png", glowClass: "from-sky-500/18 via-transparent to-transparent" },
@@ -38,6 +42,8 @@ const ecosystemRows: LogoRow[] = [
   },
   {
     label: "Lettings + ops stack",
+    inlineLabel: true,
+    floating: true,
     items: [
       { name: "Goodlord", tag: "Lettings", logoPath: "/brand-icons/goodlord.png", glowClass: "from-violet-500/18 via-transparent to-transparent" },
       { name: "Fixflo", tag: "Maintenance", logoPath: "/brand-icons/fixflo.png", glowClass: "from-emerald-500/18 via-transparent to-transparent" },
@@ -55,6 +61,8 @@ const ecosystemRows: LogoRow[] = [
   },
   {
     label: "Automation + comms",
+    inlineLabel: true,
+    floating: true,
     items: [
       { name: "Zapier", tag: "Automation", logoPath: "/brand-icons/zapier.png", glowClass: "from-orange-500/18 via-transparent to-transparent" },
       { name: "Make", tag: "Automation", logoPath: "/brand-icons/make.png", glowClass: "from-blue-500/18 via-transparent to-transparent" },
@@ -174,9 +182,20 @@ export default function Logos() {
 
             return (
               <div key={row.label} className="space-y-3">
-                <p className="px-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-600/80">
-                  {row.label}
-                </p>
+                <div className="flex items-center gap-3">
+                  {row.inlineLabel ? (
+                    <p className="whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-600/80">
+                      {row.label}
+                    </p>
+                  ) : (
+                    <p className="px-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-600/80">
+                      {row.label}
+                    </p>
+                  )}
+                  {row.floating && (
+                    <div className="h-px flex-1 bg-gradient-to-r from-indigo-200 to-transparent" />
+                  )}
+                </div>
                 <div className="flex overflow-hidden">
                   <motion.div
                     className="flex min-w-max gap-4 py-1"
