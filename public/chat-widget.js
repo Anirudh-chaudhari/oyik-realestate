@@ -158,7 +158,7 @@
       var dot = document.createElement('span'); 
       dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 0 2px rgba(34,197,94,.3);animation:lkPulse 2s infinite;';
       var statusTxt = css(document.createElement('span'), { fontSize:'12px', color:'rgba(255,255,255,.75)' });
-      statusTxt.textContent = 'Online \u00B7 Typically replies instantly';
+      statusTxt.textContent = 'Online';
       statusRow.appendChild(dot); statusRow.appendChild(statusTxt);
       titleGroup.appendChild(titleEl); titleGroup.appendChild(statusRow);
       headLeft.appendChild(avatar); headLeft.appendChild(titleGroup);
@@ -167,18 +167,17 @@
       closeBtn.onclick = function(){ state.open = false; render(); };
       head.appendChild(headLeft); head.appendChild(closeBtn);
 
-      var pillsBar = css(document.createElement('div'), { display:'flex', gap:'8px', padding:'10px 14px', background:'#1f1f32', overflowX:'auto', borderBottom:'1px solid rgba(255,255,255,.06)' });
+      var pillsBar = css(document.createElement('div'), { display:'flex', gap:'8px', padding:'10px 14px', background:'#ffffff', overflowX:'auto', borderBottom:'1px solid rgba(0,0,0,.08)' });
       [{ icon:'\uD83D\uDCCB', label:'Services', msg:'What services do you offer?' },{ icon:'\uD83D\uDD52', label:'About company', msg:'Tell me about your company' },{ icon:'\uD83D\uDCC5', label:'Book a call', msg:'Book a discovery call' }].forEach(function(p) {
-        var btn = css(document.createElement('button'), { border:'1px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'rgba(255,255,255,.85)', borderRadius:'999px', padding:'6px 14px', cursor:'pointer', fontSize:'12px', whiteSpace:'nowrap', fontFamily: cfg.fontFamily, transition:'all 0.2s ease' });
+        var btn = css(document.createElement('button'), { border:'1px solid rgba(88,82,205,.5)', background:'rgba(88,82,205,.1)', color:'#5852CD', borderRadius:'999px', padding:'6px 14px', cursor:'pointer', fontSize:'12px', whiteSpace:'nowrap', fontFamily: cfg.fontFamily, transition:'all 0.2s ease' });
         btn.className = 'pill-btn'; btn.textContent = p.icon + ' ' + p.label;
-        btn.onmouseover = function() { btn.style.background = 'rgba(60, 55, 145, 0.6)'; btn.style.borderColor = 'rgba(88, 82, 205, 1)'; };
-        btn.onmouseout = function() { btn.style.background = 'rgba(255,255,255,.06)'; btn.style.borderColor = 'rgba(255,255,255,.15)'; };
+        btn.onmouseover = function() { btn.style.background = 'rgba(88, 82, 205, 0.25)'; };
+        btn.onmouseout = function() { btn.style.background = 'rgba(88,82,205,.1)'; };
         btn.onclick = function() {
           var input = document.getElementById('lk-inp');
           if (input) { input.value = p.msg; input.focus(); }
-          btn.style.background = 'rgba(60, 55, 145, 0.9)';
-          btn.style.borderColor = 'rgba(88, 82, 205, 1)';
-          setTimeout(function(){ btn.style.background = 'rgba(255,255,255,.06)'; btn.style.borderColor = 'rgba(255,255,255,.15)'; }, 150);
+          btn.style.background = 'rgba(88, 82, 205, 0.4)';
+          setTimeout(function(){ btn.style.background = 'rgba(88,82,205,.1)'; }, 150);
         };
         pillsBar.appendChild(btn);
       });
