@@ -1,53 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oyik Real Estate Chat Widget</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Inter, 'Segoe UI', sans-serif; }
-    #lk-chat { position: fixed; z-index: 9998; }
-    .lk-widget { transition: opacity .2s ease, transform .2s ease; }
-    .lk-msgs { scrollbar-width: thin; scrollbar-color: rgba(88,82,205,.2) transparent; }
-    .lk-msgs::-webkit-scrollbar { width: 5px; }
-    .lk-msgs::-webkit-scrollbar-thumb { background: rgba(88,82,205,.2); border-radius: 999px; }
-    .lk-bubble { word-break: break-word; }
-    .lk-input { outline: none; caret-color: #5852CD; }
-    .lk-input:focus { box-shadow: none; }
-    .lk-send { transition: filter .2s ease, transform .16s ease; }
-    .lk-send:hover { filter: brightness(1.1); }
-    .lk-send:active { transform: translateY(1px); }
-    .lk-close { transition: background .2s ease, transform .16s ease; }
-    .lk-close:hover { background: rgba(255,255,255,.28) !important; }
-    .lk-close:active { transform: scale(.97); }
-    .lk-quick { transition: background .2s ease, border-color .2s ease; }
-    .lk-quick:hover { background: rgba(88,82,205,.15) !important; }
-    .lk-launcher { transition: transform .18s ease, box-shadow .2s ease; }
-    .lk-launcher:hover { transform: translateY(-2px); box-shadow: 0 20px 36px rgba(88,82,205,.55) !important; }
-    .lk-typing { display: inline-flex; align-items: center; gap: 5px; padding: 10px 14px; }
-    .lk-typing span { width: 7px; height: 7px; border-radius: 999px; background: #5852CD; opacity: 0.5; display: inline-block; animation: lkDot 1.2s infinite ease-in-out; }
-    .lk-typing span:nth-child(2) { animation-delay: .15s; }
-    .lk-typing span:nth-child(3) { animation-delay: .3s; }
-    .lk-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,.3); animation: lkPulse 2s infinite; }
-    .pill-btn:hover { background: rgba(255,255,255,.12) !important; border-color: rgba(255,255,255,.35) !important; }
-    @keyframes lkDot { 0%, 80%, 100% { transform: translateY(0); opacity: .35; } 40% { transform: translateY(-4px); opacity: 1; } }
-    @keyframes lkPulse { 0%, 100% { box-shadow: 0 0 0 2px rgba(34,197,94,.3); } 50% { box-shadow: 0 0 0 4px rgba(34,197,94,.15); } }
-    @media (max-width: 640px) {
-      #lk-widget { left: 10px !important; right: 10px !important; width: auto !important; max-width: none !important; bottom: 84px !important; border-radius: 18px !important; }
-      #lk-launcher { right: 12px !important; left: auto !important; bottom: max(12px, env(safe-area-inset-bottom)) !important; }
-    }
-    @media (max-width: 420px) {
-      #lk-widget { left: 0 !important; right: 0 !important; bottom: 0 !important; height: 100vh !important; border-radius: 0 !important; max-width: none !important; }
-      #lk-inputbar { padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important; }
-    }
-  </style>
-</head>
-<body>
-
-<div id="lk-chat"></div>
-
-<script>
 (function () {
   var cfg = {
     webhookUrl: "https://oyik.cloud/webhook/f5f0fe52-ef64-4641-b1b5-a0e72d5110bd/chat",
@@ -275,9 +225,15 @@
     }
   }
 
+  var style = document.createElement('style');
+  style.textContent = '* { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: Inter, \"Segoe UI\", sans-serif; } #lk-chat { position: fixed; z-index: 9998; } .lk-widget { transition: opacity .2s ease, transform .2s ease; } .lk-msgs { scrollbar-width: thin; scrollbar-color: rgba(88,82,205,.2) transparent; } .lk-msgs::-webkit-scrollbar { width: 5px; } .lk-msgs::-webkit-scrollbar-thumb { background: rgba(88,82,205,.2); border-radius: 999px; } .lk-bubble { word-break: break-word; } .lk-input { outline: none; caret-color: #5852CD; } .lk-input:focus { box-shadow: none; } .lk-send { transition: filter .2s ease, transform .16s ease; } .lk-send:hover { filter: brightness(1.1); } .lk-send:active { transform: translateY(1px); } .lk-close { transition: background .2s ease, transform .16s ease; } .lk-close:hover { background: rgba(255,255,255,.28) !important; } .lk-close:active { transform: scale(.97); } .lk-quick { transition: background .2s ease, border-color .2s ease; } .lk-quick:hover { background: rgba(88,82,205,.15) !important; } .lk-launcher { transition: transform .18s ease, box-shadow .2s ease; } .lk-launcher:hover { transform: translateY(-2px); box-shadow: 0 20px 36px rgba(88,82,205,.55) !important; } .lk-typing { display: inline-flex; align-items: center; gap: 5px; padding: 10px 14px; } .lk-typing span { width: 7px; height: 7px; border-radius: 999px; background: #5852CD; opacity: 0.5; display: inline-block; animation: lkDot 1.2s infinite ease-in-out; } .lk-typing span:nth-child(2) { animation-delay: .15s; } .lk-typing span:nth-child(3) { animation-delay: .3s; } .lk-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,.3); animation: lkPulse 2s infinite; } .pill-btn:hover { background: rgba(255,255,255,.12) !important; border-color: rgba(255,255,255,.35) !important; } @keyframes lkDot { 0%, 80%, 100% { transform: translateY(0); opacity: .35; } 40% { transform: translateY(-4px); opacity: 1; } } @keyframes lkPulse { 0%, 100% { box-shadow: 0 0 0 2px rgba(34,197,94,.3); } 50% { box-shadow: 0 0 0 4px rgba(34,197,94,.15); } } @media (max-width: 640px) { #lk-widget { left: 10px !important; right: 10px !important; width: auto !important; max-width: none !important; bottom: 84px !important; border-radius: 18px !important; } #lk-launcher { right: 12px !important; left: auto !important; bottom: max(12px, env(safe-area-inset-bottom)) !important; } } @media (max-width: 420px) { #lk-widget { left: 0 !important; right: 0 !important; bottom: 0 !important; height: 100vh !important; border-radius: 0 !important; max-width: none !important; } #lk-inputbar { padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important; } }';
+  document.head.appendChild(style);
+
+  if (!root) {
+    root = document.createElement('div');
+    root.id = 'lk-chat';
+    document.body.appendChild(root);
+  }
+
   render();
 })();
-</script>
-
-</body>
-</html>
