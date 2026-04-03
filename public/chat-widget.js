@@ -129,16 +129,31 @@
     var since = Date.now();
     try {
       var res = await fetch(cfg.webhookUrl, { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' }, 
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }, 
         body: JSON.stringify({ message: text, timestamp: new Date().toISOString(), sessionId: state.sessionId }),
-        mode: 'cors'
+        credentials: 'same-origin'
       });
+      if (!res.ok) throw new Error('Network response was not ok');
       var raw = await res.text();
       var parsed = parseWebhook(raw);
       state.messages.push({ id: Date.now()+1, text: parsed.message, user: false, time: new Date() });
     } catch(e) {
-      state.messages.push({ id: Date.now()+1, text: 'Unable to connect. Please check your connection and try again.', user: false, time: new Date() });
+      try {
+        var res2 = await fetch(cfg.webhookUrl, { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ message: text, timestamp: new Date().toISOString(), sessionId: state.sessionId })
+        });
+        var raw2 = await res2.text();
+        var parsed2 = parseWebhook(raw2);
+        state.messages.push({ id: Date.now()+1, text: parsed2.message, user: false, time: new Date() });
+      } catch(e2) {
+        state.messages.push({ id: Date.now()+1, text: 'Unable to connect. Please check your connection and try again.', user: false, time: new Date() });
+      }
     } finally {
       var wait = 550 - (Date.now() - since);
       if (wait > 0) await new Promise(function(r){ setTimeout(r, wait); });
