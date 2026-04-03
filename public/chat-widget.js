@@ -198,7 +198,7 @@
       sendBtn.onclick = function(){ send(); };
       inputBar.appendChild(input); inputBar.appendChild(sendBtn);
 
-      var powered = css(document.createElement('div'), { fontSize:'11px', color:'rgba(0,0,0,.45)', textAlign:'center', padding:'6px 0 10px', background:'#ffffff', borderTop:'1px solid rgba(0,0,0,.06)' });
+      var powered = css(document.createElement('div'), { fontSize:'11px', color:'rgba(0,0,0,.45)', textAlign:'center', padding:'10px 0 14px', background:'#ffffff', borderTop:'1px solid rgba(0,0,0,.06)' });
       var poweredLink = document.createElement('a');
       poweredLink.href = 'https://oyik.ai'; poweredLink.target = '_blank'; poweredLink.rel = 'noopener noreferrer';
       poweredLink.textContent = 'Powered by Oyik.AI';
