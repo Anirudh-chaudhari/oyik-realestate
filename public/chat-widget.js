@@ -20,27 +20,22 @@
       botBubble: "#f0f0f7",
       botText: "#1a1a2e"
     },
-    quickReplies: [
-      { id: 1, icon: "Rent", text: "I want to rent a property" },
-      { id: 2, icon: "Buy",  text: "I want to buy a property"  }
-    ]
+    quickReplies: []
   };
 
   var root = document.getElementById('lk-chat');
+  if (!root) {
+    root = document.createElement('div');
+    root.id = 'lk-chat';
+    document.body.appendChild(root);
+  }
+
   var state = {
     open: !!cfg.autoOpen,
     typing: false,
     sessionId: 's_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10),
     messages: [{ id: 1, text: cfg.welcomeMessage, user: false, properties: [], time: new Date() }]
   };
-
-  function fmt(date) {
-    if (!date) return '';
-    var h = date.getHours(), m = date.getMinutes();
-    var ap = h >= 12 ? 'PM' : 'AM';
-    h = h % 12 || 12;
-    return 'Today ' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ' ' + ap;
-  }
 
   function css(el, styles) {
     Object.keys(styles).forEach(function(k){ el.style[k] = styles[k]; });
@@ -62,14 +57,28 @@
     var fallback = 'Thanks for your message.';
     var text = (raw || '').trim();
     var r = parseJson(text);
-    if (!r || typeof r !== 'object') return { message: text || fallback };
+    if (!r || typeof r !== 'object') {
+      var lowerText = text.toLowerCase();
+      if (lowerText.indexOf('error') !== -1 && (lowerText.indexOf('workflow') !== -1 || lowerText.indexOf('n8n') !== -1 || lowerText.indexOf('code') !== -1 || lowerText.indexOf('issue') !== -1)) {
+        return { message: 'Sorry, something went wrong. Please try again.' };
+      }
+      return { message: text || fallback };
+    }
     var node = r;
     if (Object.prototype.hasOwnProperty.call(r, 'output')) {
       var out = r.output;
       if (typeof out === 'string') { var n = parseJson(out); node = n && typeof n === 'object' ? n : { message: out }; }
       else if (out && typeof out === 'object') { node = out; }
     }
-    return { message: pick(node.message, node.response, node.reply, node.text) || fallback };
+    var msg = pick(node.message, node.response, node.reply, node.text);
+    if (!msg) {
+      return { message: fallback };
+    }
+    var lowerMsg = msg.toLowerCase();
+    if (lowerMsg.indexOf('error') !== -1 && (lowerMsg.indexOf('workflow') !== -1 || lowerMsg.indexOf('n8n') !== -1 || lowerMsg.indexOf('code') !== -1 || lowerMsg.indexOf('issue') !== -1)) {
+      return { message: 'Sorry, something went wrong. Please try again.' };
+    }
+    return { message: msg };
   }
 
   function renderMessages(box) {
@@ -78,16 +87,14 @@
       if (idx === 0 && msg.time) {
         var ts = document.createElement('div');
         ts.style.cssText = 'font-size:11px;color:rgba(0,0,0,.35);text-align:center;padding:4px 0 8px;';
-        ts.textContent = fmt(msg.time);
+        var h = msg.time.getHours(), m = msg.time.getMinutes();
+        var ap = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        ts.textContent = 'Today ' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ' ' + ap;
         box.appendChild(ts);
       }
       var block = css(document.createElement('div'), { display:'flex', flexDirection:'column', gap:'6px' });
       var row = css(document.createElement('div'), { display:'flex', justifyContent: msg.user ? 'flex-end' : 'flex-start', alignItems:'flex-end', gap:'8px' });
-      if (!msg.user) {
-        var badge = css(document.createElement('span'), { width:'32px', height:'32px', minWidth:'32px', borderRadius:'12px', background:'#5852CD', display:'inline-flex', alignItems:'center', justifyContent:'center', fontSize:'16px', flexShrink:'0', marginBottom:'2px' });
-        badge.textContent = '\uD83E\uDD16';
-        row.appendChild(badge);
-      }
       var bubble = document.createElement('div');
       bubble.className = 'lk-bubble';
       bubble.textContent = msg.text;
@@ -97,31 +104,13 @@
       box.appendChild(block);
     });
 
-    if (state.messages.length < 3) {
-      var qWrap = css(document.createElement('div'), { display:'flex', flexWrap:'wrap', gap:'8px', paddingLeft:'40px' });
-      cfg.quickReplies.forEach(function(q) {
-        var btn = document.createElement('button');
-        btn.className = 'lk-quick';
-        btn.textContent = q.icon + '  ' + q.text;
-        css(btn, { border:'1.5px solid rgba(88,82,205,.5)', background:'rgba(88,82,205,.08)', color:'#5852CD', borderRadius:'999px', padding:'8px 14px', cursor:'pointer', fontSize:'12px', fontFamily: cfg.fontFamily });
-        btn.onclick = function(){ send(q.text); };
-        qWrap.appendChild(btn);
-      });
-      box.appendChild(qWrap);
-    }
-
     if (state.typing) {
-      var tRow = css(document.createElement('div'), { display:'flex', alignItems:'flex-end', gap:'8px' });
-      var tBadge = css(document.createElement('span'), { width:'32px', height:'32px', minWidth:'32px', borderRadius:'12px', background:'#5852CD', display:'inline-flex', alignItems:'center', justifyContent:'center', fontSize:'16px', flexShrink:'0' });
-      tBadge.textContent = '\uD83E\uDD16';
-      var tBubble = css(document.createElement('div'), { background: cfg.colors.botBubble, borderRadius: '18px 18px 18px 4px' });
+      var tBubble = css(document.createElement('div'), { background: cfg.colors.botBubble, borderRadius: '18px 18px 18px 4px', padding:'10px 14px', display:'inline-block', marginLeft:'8px' });
       var typing = document.createElement('div');
       typing.className = 'lk-typing';
       typing.innerHTML = '<span></span><span></span><span></span>';
       tBubble.appendChild(typing);
-      tRow.appendChild(tBadge);
-      tRow.appendChild(tBubble);
-      box.appendChild(tRow);
+      box.appendChild(tBubble);
     }
     box.scrollTop = box.scrollHeight;
   }
@@ -164,9 +153,10 @@
       avatar.textContent = '\uD83E\uDD16';
       var titleGroup = css(document.createElement('div'), { minWidth:'0' });
       var titleEl = css(document.createElement('div'), { fontWeight:'700', fontSize:'15px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' });
-      titleEl.textContent = cfg.companyName + ' Assistant';
+      titleEl.textContent = 'Oyik.AI Assistant';
       var statusRow = css(document.createElement('div'), { display:'flex', alignItems:'center', gap:'6px', marginTop:'3px' });
-      var dot = document.createElement('span'); dot.className = 'lk-status-dot';
+      var dot = document.createElement('span'); 
+      dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 0 2px rgba(34,197,94,.3);animation:lkPulse 2s infinite;';
       var statusTxt = css(document.createElement('span'), { fontSize:'12px', color:'rgba(255,255,255,.75)' });
       statusTxt.textContent = 'Online \u00B7 Typically replies instantly';
       statusRow.appendChild(dot); statusRow.appendChild(statusTxt);
@@ -178,13 +168,22 @@
       head.appendChild(headLeft); head.appendChild(closeBtn);
 
       var pillsBar = css(document.createElement('div'), { display:'flex', gap:'8px', padding:'10px 14px', background:'#1f1f32', overflowX:'auto', borderBottom:'1px solid rgba(255,255,255,.06)' });
-      [{ icon:'\uD83D\uDCCB', label:'Services' },{ icon:'\uD83D\uDD52', label:'Available slots' },{ icon:'\uD83D\uDCC5', label:'Book a call' }].forEach(function(p) {
-        var btn = css(document.createElement('button'), { border:'1px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'rgba(255,255,255,.85)', borderRadius:'999px', padding:'6px 14px', cursor:'pointer', fontSize:'12px', whiteSpace:'nowrap', fontFamily: cfg.fontFamily });
+      [{ icon:'\uD83D\uDCCB', label:'Services', msg:'What services do you offer?' },{ icon:'\uD83D\uDD52', label:'About company', msg:'Tell me about your company' },{ icon:'\uD83D\uDCC5', label:'Book a call', msg:'Book a discovery call' }].forEach(function(p) {
+        var btn = css(document.createElement('button'), { border:'1px solid rgba(255,255,255,.15)', background:'rgba(255,255,255,.06)', color:'rgba(255,255,255,.85)', borderRadius:'999px', padding:'6px 14px', cursor:'pointer', fontSize:'12px', whiteSpace:'nowrap', fontFamily: cfg.fontFamily, transition:'all 0.2s ease' });
         btn.className = 'pill-btn'; btn.textContent = p.icon + ' ' + p.label;
+        btn.onmouseover = function() { btn.style.background = 'rgba(60, 55, 145, 0.6)'; btn.style.borderColor = 'rgba(88, 82, 205, 1)'; };
+        btn.onmouseout = function() { btn.style.background = 'rgba(255,255,255,.06)'; btn.style.borderColor = 'rgba(255,255,255,.15)'; };
+        btn.onclick = function() {
+          var input = document.getElementById('lk-inp');
+          if (input) { input.value = p.msg; input.focus(); }
+          btn.style.background = 'rgba(60, 55, 145, 0.9)';
+          btn.style.borderColor = 'rgba(88, 82, 205, 1)';
+          setTimeout(function(){ btn.style.background = 'rgba(255,255,255,.06)'; btn.style.borderColor = 'rgba(255,255,255,.15)'; }, 150);
+        };
         pillsBar.appendChild(btn);
       });
 
-      var msgBox = css(document.createElement('div'), { flex:'1', overflowY:'auto', padding:'14px 12px', display:'flex', flexDirection:'column', gap:'10px', background:'#ffffff' });
+      var msgBox = css(document.createElement('div'), { flex:'1', overflowY:'auto', padding:'14px 12px 20px', display:'flex', flexDirection:'column', gap:'10px', background:'#ffffff' });
       msgBox.id = 'lk-msgs'; msgBox.className = 'lk-msgs';
 
       var inputBar = css(document.createElement('div'), { display:'flex', gap:'8px', borderTop:'1px solid rgba(0,0,0,.08)', padding:'10px 12px', background:'#ffffff', alignItems:'center' });
@@ -198,7 +197,7 @@
       sendBtn.onclick = function(){ send(); };
       inputBar.appendChild(input); inputBar.appendChild(sendBtn);
 
-      var powered = css(document.createElement('div'), { fontSize:'11px', color:'rgba(0,0,0,.45)', textAlign:'center', padding:'10px 0 14px', background:'#ffffff', borderTop:'1px solid rgba(0,0,0,.06)' });
+      var powered = css(document.createElement('div'), { fontSize:'11px', color:'rgba(0,0,0,.45)', textAlign:'center', padding:'12px 0 14px', background:'#ffffff', borderTop:'1px solid rgba(0,0,0,.06)' });
       var poweredLink = document.createElement('a');
       poweredLink.href = 'https://oyik.ai'; poweredLink.target = '_blank'; poweredLink.rel = 'noopener noreferrer';
       poweredLink.textContent = 'Powered by Oyik.AI';
@@ -218,16 +217,6 @@
       root.appendChild(launcher);
     }
   }
-
-  if (!root) {
-    root = document.createElement('div');
-    root.id = 'lk-chat';
-    document.body.appendChild(root);
-  }
-
-  var style = document.createElement('style');
-  style.textContent = '#lk-chat { position: fixed; z-index: 9998; } #lk-chat .lk-widget { transition: opacity .2s ease, transform .2s ease; } #lk-chat .lk-msgs { scrollbar-width: thin; scrollbar-color: rgba(88,82,205,.2) transparent; } #lk-chat .lk-msgs::-webkit-scrollbar { width: 5px; } #lk-chat .lk-msgs::-webkit-scrollbar-thumb { background: rgba(88,82,205,.2); border-radius: 999px; } #lk-chat .lk-bubble { word-break: break-word; } #lk-chat .lk-input { outline: none; caret-color: #5852CD; } #lk-chat .lk-input:focus { box-shadow: none; } #lk-chat .lk-send { transition: filter .2s ease, transform .16s ease; } #lk-chat .lk-send:hover { filter: brightness(1.1); } #lk-chat .lk-send:active { transform: translateY(1px); } #lk-chat .lk-close { transition: background .2s ease, transform .16s ease; } #lk-chat .lk-close:hover { background: rgba(255,255,255,.28) !important; } #lk-chat .lk-close:active { transform: scale(.97); } #lk-chat .lk-quick { transition: background .2s ease, border-color .2s ease; } #lk-chat .lk-quick:hover { background: rgba(88,82,205,.15) !important; } #lk-chat .lk-launcher { transition: transform .18s ease, box-shadow .2s ease; } #lk-chat .lk-launcher:hover { transform: translateY(-2px); box-shadow: 0 20px 36px rgba(88,82,205,.55) !important; } #lk-chat .lk-typing { display: inline-flex; align-items: center; gap: 5px; padding: 10px 14px; } #lk-chat .lk-typing span { width: 7px; height: 7px; border-radius: 999px; background: #5852CD; opacity: 0.5; display: inline-block; animation: lkDot 1.2s infinite ease-in-out; } #lk-chat .lk-typing span:nth-child(2) { animation-delay: .15s; } #lk-chat .lk-typing span:nth-child(3) { animation-delay: .3s; } #lk-chat .lk-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 0 2px rgba(34,197,94,.3); animation: lkPulse 2s infinite; } #lk-chat .pill-btn:hover { background: rgba(255,255,255,.12) !important; border-color: rgba(255,255,255,.35) !important; } @keyframes lkDot { 0%, 80%, 100% { transform: translateY(0); opacity: .35; } 40% { transform: translateY(-4px); opacity: 1; } } @keyframes lkPulse { 0%, 100% { box-shadow: 0 0 0 2px rgba(34,197,94,.3); } 50% { box-shadow: 0 0 0 4px rgba(34,197,94,.15); } } @media (max-width: 640px) { #lk-chat #lk-widget { left: 10px !important; right: 10px !important; width: auto !important; max-width: none !important; bottom: 84px !important; border-radius: 18px !important; } #lk-chat #lk-launcher { right: 12px !important; left: auto !important; bottom: max(12px, env(safe-area-inset-bottom)) !important; } } @media (max-width: 420px) { #lk-chat #lk-widget { left: 0 !important; right: 0 !important; bottom: 0 !important; height: 100vh !important; border-radius: 0 !important; max-width: none !important; } #lk-chat #lk-inputbar { padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important; } }';
-  document.head.appendChild(style);
 
   render();
 })();
