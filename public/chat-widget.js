@@ -158,11 +158,11 @@
       var titleEl = css(document.createElement('div'), { fontWeight:'700', fontSize:'15px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' });
       titleEl.textContent = 'Oyik.AI Assistant';
       var statusRow = css(document.createElement('div'), { display:'flex', alignItems:'center', gap:'6px', marginTop:'3px' });
-      var dot = document.createElement('span'); 
-      dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 0 2px rgba(34,197,94,.3);animation:lkPulse 2s infinite;';
       var statusTxt = css(document.createElement('span'), { fontSize:'12px', color:'rgba(255,255,255,.75)' });
       statusTxt.textContent = 'Online';
-      statusRow.appendChild(dot); statusRow.appendChild(statusTxt);
+      var dot = document.createElement('span'); 
+      dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;animation:lkPulse 2s infinite;';
+      statusRow.appendChild(statusTxt); statusRow.appendChild(dot);
       titleGroup.appendChild(titleEl); titleGroup.appendChild(statusRow);
       headLeft.appendChild(avatar); headLeft.appendChild(titleGroup);
       var closeBtn = css(document.createElement('button'), { border:'none', background:'rgba(255,255,255,.18)', color:'#fff', borderRadius:'999px', width:'32px', height:'32px', cursor:'pointer', fontSize:'20px', lineHeight:'1', display:'flex', alignItems:'center', justifyContent:'center' });
