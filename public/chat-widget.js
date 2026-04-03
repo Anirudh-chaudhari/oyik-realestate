@@ -73,7 +73,7 @@
       if (typeof out === 'string') { var n = parseJson(out); node = n && typeof n === 'object' ? n : { message: out }; }
       else if (out && typeof out === 'object') { node = out; }
     }
-    var msg = pick(node.message, node.response, node.reply, node.text);
+    var msg = pick(node.message, node.response, node.reply, node.text, node.output);
     if (!msg) {
       return { message: fallback };
     }
@@ -128,25 +128,36 @@
     render();
     var since = Date.now();
     try {
-      var res = await fetch(cfg.webhookUrl, { 
+      var res = await fetch(cfg.webhookUrl, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
-        }, 
-        body: JSON.stringify({ message: text, timestamp: new Date().toISOString(), sessionId: state.sessionId }),
-        credentials: 'same-origin'
+        },
+        body: JSON.stringify({
+          action: 'sendMessage',
+          chatInput: text,
+          message: text,
+          sessionId: state.sessionId,
+          timestamp: new Date().toISOString()
+        })
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       var raw = await res.text();
       var parsed = parseWebhook(raw);
       state.messages.push({ id: Date.now()+1, text: parsed.message, user: false, time: new Date() });
     } catch(e) {
       try {
-        var res2 = await fetch(cfg.webhookUrl, { 
+        var res2 = await fetch(cfg.webhookUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' }, 
-          body: JSON.stringify({ message: text, timestamp: new Date().toISOString(), sessionId: state.sessionId })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'sendMessage',
+            chatInput: text,
+            message: text,
+            sessionId: state.sessionId,
+            timestamp: new Date().toISOString()
+          })
         });
         var raw2 = await res2.text();
         var parsed2 = parseWebhook(raw2);
@@ -178,7 +189,7 @@
       var titleEl = css(document.createElement('div'), { fontWeight:'700', fontSize:'15px', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' });
       titleEl.textContent = 'Oyik.AI Assistant';
       var statusRow = css(document.createElement('div'), { display:'flex', alignItems:'center', gap:'6px', marginTop:'3px' });
-      var dot = document.createElement('span'); 
+      var dot = document.createElement('span');
       dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 5px 1px #22c55e;animation:lkPulse 1.5s infinite;';
       var statusTxt = css(document.createElement('span'), { fontSize:'12px', color:'rgba(255,255,255,.75)' });
       statusTxt.textContent = 'Online';
@@ -191,16 +202,13 @@
       head.appendChild(headLeft); head.appendChild(closeBtn);
 
       var pillsBar = css(document.createElement('div'), { display:'flex', gap:'8px', padding:'10px 14px', background:'#ffffff', overflowX:'auto', borderBottom:'1px solid rgba(0,0,0,.08)' });
-      [{ icon:'\uD83D\uDCCB', label:'Services', msg:'What services do you offer?' },{ icon:'\uD83D\uDD52', label:'About company', msg:'Tell me about your company' },{ icon:'\uD83D\uDCC5', label:'Book a call', msg:'Book a discovery call' }].forEach(function(p) {
+      [{ icon:'\uD83D\uDCCB', label:'Services', msg:'What services do you offer?' },{ icon:'\uD83D\uDD52', label:'About company', msg:'Tell me about your company' },{ icon:'\uD83D\uDCC5', label:'Book a call', msg:'Book a call' }].forEach(function(p) {
         var btn = css(document.createElement('button'), { border:'1px solid #6c63ff', background:'#6c63ff', color:'#ffffff', borderRadius:'999px', padding:'6px 14px', cursor:'pointer', fontSize:'12px', whiteSpace:'nowrap', fontFamily: cfg.fontFamily, transition:'all 0.2s ease' });
         btn.className = 'pill-btn'; btn.textContent = p.icon + ' ' + p.label;
         btn.onmouseover = function() { btn.style.background = '#5a52e0'; };
         btn.onmouseout = function() { btn.style.background = '#6c63ff'; };
         btn.onclick = function() {
-          var input = document.getElementById('lk-inp');
-          if (input) { input.value = p.msg; input.focus(); }
-          btn.style.background = '#4f46e5';
-          setTimeout(function(){ btn.style.background = '#6c63ff'; }, 150);
+          send(p.msg);
         };
         pillsBar.appendChild(btn);
       });
