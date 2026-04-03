@@ -30,7 +30,7 @@
     document.body.appendChild(root);
   }
   var style = document.createElement('style');
-  style.textContent = '@keyframes lkPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.7; } }';
+  style.textContent = '@keyframes lkPulse { 0%, 100% { opacity: 1; box-shadow: 0 0 4px 1px #22c55e; } 50% { opacity: 0.5; box-shadow: 0 0 8px 2px #22c55e; } }';
   document.head.appendChild(style);
 
   var state = {
