@@ -129,6 +129,7 @@
     var since = Date.now();
     try {
       var res = await fetch(cfg.webhookUrl, {
+        mode: 'cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -149,6 +150,7 @@
     } catch(e) {
       try {
         var res2 = await fetch(cfg.webhookUrl, {
+          mode: 'cors',
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
