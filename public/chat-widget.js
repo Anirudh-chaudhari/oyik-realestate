@@ -20,6 +20,7 @@
       botBubble: "#f0f0f7",
       botText: "#1a1a2e"
     },
+    logo: "https://res.cloudinary.com/duniimr1w/image/upload/v1775292303/INSTA_w7wdcz.jpg",
     quickReplies: []
   };
 
@@ -372,7 +373,11 @@
       var head = css(document.createElement('div'), { padding: '14px 16px', background: cfg.colors.brandA, color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' });
       var headLeft = css(document.createElement('div'), { display: 'flex', alignItems: 'center', gap: '12px', minWidth: '0' });
       var avatar = css(document.createElement('div'), { width: '42px', height: '42px', minWidth: '42px', borderRadius: '14px', background: 'rgba(255,255,255,.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px' });
-      avatar.textContent = '\uD83E\uDD16';
+      if (cfg.logo) {
+        avatar.innerHTML = '<img src="' + cfg.logo + '" style="width:32px;height:32px;border-radius:10px;object-fit:cover;">';
+      } else {
+        avatar.textContent = '\uD83E\uDD16';
+      }
       var titleGroup = css(document.createElement('div'), { minWidth: '0' });
       var titleEl = css(document.createElement('div'), { fontWeight: '700', fontSize: '15px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' });
       titleEl.textContent = 'Oyik.AI Assistant';
